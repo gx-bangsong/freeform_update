@@ -30,7 +30,8 @@ android {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            // No release keystore is checked into the repository. Release builds use
+            // the default signing configuration supplied by the Android plugin.
         }
     }
     compileOptions {
