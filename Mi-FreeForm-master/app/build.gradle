@@ -17,8 +17,9 @@ android {
         applicationId "com.sunshine.freeform"
         minSdkVersion 29
         targetSdkVersion 31
-        versionCode 39
-        versionName "2.0.5 eswd ver15"
+        // Increase the integer version so Android accepts this APK as an update.
+        versionCode 40
+        versionName "2.0.5 eswd ver16"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
