@@ -47,8 +47,10 @@ if (System.getenv('GITHUB_ACTIONS') == 'true') {
             if (compilerErrors.size() > 40) compilerErrors.remove(0)
         }
     } as org.gradle.api.logging.StandardOutputListener
-    logging.addStandardOutputListener(listener)
-    logging.addStandardErrorListener(listener)
+    allprojects {
+        logging.addStandardOutputListener(listener)
+        logging.addStandardErrorListener(listener)
+    }
     gradle.buildFinished { result ->
         if (result.failure != null) {
             def messages = []
