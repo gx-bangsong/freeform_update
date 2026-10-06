@@ -39,18 +39,6 @@ task clean(type: Delete) {
 // Surface dependency/configuration failures in GitHub Checks, even when the
 // runner's downloadable log storage is unreachable from the client.
 if (System.getenv('GITHUB_ACTIONS') == 'true') {
-    def compilerErrors = Collections.synchronizedList(new ArrayList<String>())
-    def listener = { CharSequence output ->
-        def line = output.toString()
-        if (line.contains('e: ') || line.contains('error: ')) {
-            compilerErrors.add(line)
-            if (compilerErrors.size() > 40) compilerErrors.remove(0)
-        }
-    } as org.gradle.api.logging.StandardOutputListener
-    allprojects {
-        logging.addStandardOutputListener(listener)
-        logging.addStandardErrorListener(listener)
-    }
     gradle.buildFinished { result ->
         if (result.failure != null) {
             def messages = []
@@ -59,7 +47,7 @@ if (System.getenv('GITHUB_ACTIONS') == 'true') {
                 messages.add(failure.message ?: failure.class.name)
                 failure = failure.cause
             }
-            def detail = (messages.join('\nCaused by: ') + '\n' + compilerErrors.join('\n'))
+            def detail = messages.join('\nCaused by: ')
                 .replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
             println "::error title=Gradle build failure::${detail}"
         }
