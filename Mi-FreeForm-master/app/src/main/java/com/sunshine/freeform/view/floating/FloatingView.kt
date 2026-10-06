@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sunshine.freeform.ThemeSettings
 import com.sunshine.freeform.R
 import com.sunshine.freeform.callback.ClickListener
 import com.sunshine.freeform.callback.OrientationChangedListener
@@ -41,9 +42,11 @@ import kotlin.math.roundToInt
  */
 @DelicateCoroutinesApi
 class FloatingView(
-    private val context: Context,
+    context: Context,
     private val showLocation: Int
 ) {
+
+    private val context = ThemeSettings.wrap(context)
 
     private val floatingViewViewModel = FloatingViewViewModel(context)
     private var allFreeFormApps: ArrayList<FreeFormAppsEntity>? = null

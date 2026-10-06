@@ -27,6 +27,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.sunshine.freeform.MiFreeForm
+import com.sunshine.freeform.ThemeSettings
 import com.sunshine.freeform.R
 import com.sunshine.freeform.callback.OrientationChangedListener
 import com.sunshine.freeform.hook.utils.HookFailException
@@ -43,11 +44,13 @@ import kotlin.math.*
  */
 @DelicateCoroutinesApi
 class FreeFormView(
-    private val context: Context,
+    context: Context,
     val command: String,
     private val packageName: String,
     private val launcherActivity: String
 ) {
+
+    private val context = ThemeSettings.wrap(context)
 
     companion object {
         private const val TAG = "FreeFormView"
