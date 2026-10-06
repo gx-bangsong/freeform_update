@@ -146,7 +146,7 @@ class AllAppsAdapter(
             userManager.userProfiles.forEach {
                 loaded.addAll(launcherApps.getActivityList(null, it))
             }
-            val sorted = loaded.sortedBy { Pinyin.toPinyin(it.label.toString()) }
+            val sorted = loaded.sortedBy { Pinyin.toPinyin(it.label.toString(), "") }
             withContext(Dispatchers.Main) {
                 allAppsList = ArrayList(sorted)
                 notifyDataSetChanged()
