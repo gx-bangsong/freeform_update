@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appearance_title">外观</string>
+    <string name="theme_title">应用主题</string>
+    <string-array name="theme_entries">
+        <item>跟随系统</item>
+        <item>浅色</item>
+        <item>AMOLED 纯黑</item>
+    </string-array>
+</resources>

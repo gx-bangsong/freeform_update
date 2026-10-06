@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="@string/appearance_title">
+        <ListPreference
+            android:key="app_theme"
+            android:title="@string/theme_title"
+            android:defaultValue="system"
+            android:entries="@array/theme_entries"
+            android:entryValues="@array/theme_values"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:title="@string/category_freeform_base"
         app:iconSpaceReserved="true">

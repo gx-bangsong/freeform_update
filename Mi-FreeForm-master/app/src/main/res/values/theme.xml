@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appearance_title">Appearance</string>
+    <string name="theme_title">App theme</string>
+    <string-array name="theme_entries">
+        <item>Follow system</item>
+        <item>Light</item>
+        <item>AMOLED black</item>
+    </string-array>
+</resources>

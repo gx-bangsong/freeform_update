@@ -21,6 +21,7 @@ class MiFreeForm : Application(), ViewModelStoreOwner {
 
     override fun onCreate() {
         super.onCreate()
+        ThemeSettings.apply(this)
         Sui.init(BuildConfig.APPLICATION_ID)
         me = this
         baseViewModel = BaseViewModel.get()

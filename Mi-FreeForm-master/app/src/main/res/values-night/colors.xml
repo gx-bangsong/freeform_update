@@ -8,10 +8,10 @@
     <color name="freeform_bar">?colorSurface</color>
 
     <!-- AMOLED black: avoid the grey tint used by Material's default dark palette. -->
-    <color name="google_grey_900">#FF000000</color>
+    <color name="card_outline">#FF303030</color>
     <color name="color_primary">@color/google_blue_300</color>
     <color name="color_surface">#FF000000</color>
-    <color name="color_surface_transparent">#00000000</color>
+    <color name="color_surface_transparent">#FF000000</color>
     <color name="color_text">#FFFFFFFF</color>
 
 </resources>

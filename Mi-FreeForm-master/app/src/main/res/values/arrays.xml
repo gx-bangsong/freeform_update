@@ -49,4 +49,9 @@
         <item>Y</item>
         <item>Z</item>
     </array>
+    <string-array name="theme_values" translatable="false">
+        <item>system</item>
+        <item>light</item>
+        <item>dark</item>
+    </string-array>
 </resources>

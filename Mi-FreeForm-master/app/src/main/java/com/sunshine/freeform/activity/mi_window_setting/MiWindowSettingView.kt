@@ -20,6 +20,8 @@ import androidx.preference.SwitchPreference
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
+import com.sunshine.freeform.ThemeSettings
+import androidx.preference.ListPreference
 import com.sunshine.freeform.R
 import com.sunshine.freeform.activity.choose_free_form_apps.ChooseAppsActivity
 import com.sunshine.freeform.activity.floating_setting.FloatingSettingActivity
@@ -40,6 +42,13 @@ class MiWindowSettingView : PreferenceFragmentCompat(), Preference.OnPreferenceC
         setPreferencesFromResource(R.xml.mi_window_setting, rootKey)
 
         sp = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        findPreference<ListPreference>(ThemeSettings.KEY)?.setOnPreferenceChangeListener { _, value ->
+            // Persist before AppCompat recreates the active activities.
+            sp.edit().putString(ThemeSettings.KEY, value as String).apply()
+            ThemeSettings.apply(requireContext())
+            true
+        }
 
         preferenceManager.findPreference<SwitchPreference>("show_floating")?.apply {
             onPreferenceChangeListener = this@MiWindowSettingView

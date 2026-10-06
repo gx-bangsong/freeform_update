@@ -27,11 +27,13 @@ open class BaseActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
         window.statusBarColor = getColor(R.color.color_surface)
         window.navigationBarColor = getColor(R.color.color_surface)
-        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars =
-            resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK !=
+        val isLight = resources.configuration.uiMode and
+            android.content.res.Configuration.UI_MODE_NIGHT_MASK !=
             android.content.res.Configuration.UI_MODE_NIGHT_YES
-        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightNavigationBars =
-            false
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightStatusBars = isLight
+            isAppearanceLightNavigationBars = isLight
+        }
 
         baseView = LayoutInflater.from(this).inflate(R.layout.activity_base, null, false)
     }
