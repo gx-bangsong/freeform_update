@@ -76,7 +76,7 @@ dependencies {
 
     implementation 'dev.rikka.rikkax.preference:simplemenu-preference:1.0.1'
 
-    def shizuku_version = '11.0.0'
+    def shizuku_version = '11.0.3'
     // Shizuku moved from the old JCenter group to Maven Central.
     implementation "dev.rikka.shizuku:api:$shizuku_version"
     implementation "dev.rikka.shizuku:provider:$shizuku_version"
