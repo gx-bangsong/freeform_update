@@ -3,7 +3,10 @@ buildscript {
     ext.kotlin_version = "1.4.10"
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        maven { url 'https://api.xposed.info/' }
+        maven { url 'https://maven.rikka.dev/repository/maven-releases/' }
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.0"
@@ -19,8 +22,10 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven { url 'https://dl.bintray.com/rikkaw/Libraries' }
+        mavenCentral()
+        maven { url 'https://api.xposed.info/' }
+        maven { url 'https://maven.rikka.dev/repository/maven-releases/' }
+        maven { url 'https://jitpack.io' }
     }
 }
 
