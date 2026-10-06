@@ -14,4 +14,5 @@
     <color name="color_surface_transparent">#FF000000</color>
     <color name="color_text">#FFFFFFFF</color>
 
+    <color name="floating_panel_outline">#FF303030</color>
 </resources>

@@ -37,7 +37,8 @@ import kotlin.collections.HashMap
 @DelicateCoroutinesApi
 class AllAppsAdapter(
     private val context: Context,
-    private val callback: ClickListener
+    private val callback: ClickListener,
+    private val scope: CoroutineScope
 ) : RecyclerView.Adapter<AllAppsAdapter.ViewHolder>() {
 
     private var userManager: UserManager
@@ -139,19 +140,18 @@ class AllAppsAdapter(
         userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
         val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
 
-        GlobalScope.launch(Dispatchers.IO) {
+        scope.launch(Dispatchers.IO) {
+            // Do not mutate the RecyclerView's live data from the worker thread.
+            val loaded = ArrayList<LauncherActivityInfo>()
             userManager.userProfiles.forEach {
-                allAppsList.addAll(launcherApps.getActivityList(null, it))
+                loaded.addAll(launcherApps.getActivityList(null, it))
             }
-
-            allAppsList.forEach {
-                appsPinyinMap[it.label.toString()] = Pinyin.toPinyin(it.label[0])
+            val sorted = loaded.sortedBy { Pinyin.toPinyin(it.label.toString()) }
+            withContext(Dispatchers.Main) {
+                allAppsList = ArrayList(sorted)
+                notifyDataSetChanged()
+                onLoadFinish?.loadFinish()
             }
-            Collections.sort(allAppsList, PinyinComparable())
-            withContext(Dispatchers.Main){
-                notifyItemRangeChanged(0,allAppsList.size)
-            }
-            onLoadFinish?.loadFinish()
         }
 
         appIconLoader = AppIconLoader(context.resources.getDimensionPixelSize(android.R.dimen.app_icon_size), false, context)
