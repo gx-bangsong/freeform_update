@@ -6,6 +6,14 @@
 ##
 ##############################################################################
 
+# The legacy Actions workflow selects JDK 8. Android 31 / Room's annotation
+# processing needs JDK 11 (JDK 8 cannot read MODULE attributes). Use the hosted
+# runner's preinstalled JDK without changing developer machines.
+if [ "$GITHUB_ACTIONS" = "true" ] && [ -x "$JAVA_HOME_11_X64/bin/java" ]; then
+    JAVA_HOME="$JAVA_HOME_11_X64"
+    export JAVA_HOME
+fi
+
 # Attempt to set APP_HOME
 # Resolve links: $0 may be a link
 PRG="$0"
