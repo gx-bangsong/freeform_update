@@ -32,3 +32,20 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+// Surface dependency/configuration failures in GitHub Checks, even when the
+// runner's downloadable log storage is unreachable from the client.
+if (System.getenv('GITHUB_ACTIONS') == 'true') {
+    gradle.buildFinished { result ->
+        if (result.failure != null) {
+            def messages = []
+            def failure = result.failure
+            while (failure != null && messages.size() < 12) {
+                messages.add(failure.message ?: failure.class.name)
+                failure = failure.cause
+            }
+            def detail = messages.join('\nCaused by: ')
+                .replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+            println "::error title=Gradle build failure::${detail}"
+        }
+    }
+}
