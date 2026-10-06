@@ -30,7 +30,7 @@ open class BaseActivity : AppCompatActivity() {
         val isLight = resources.configuration.uiMode and
             android.content.res.Configuration.UI_MODE_NIGHT_MASK !=
             android.content.res.Configuration.UI_MODE_NIGHT_YES
-        WindowCompat.getInsetsController(window, window.decorView).apply {
+        WindowCompat.getInsetsController(window, window.decorView)?.apply {
             isAppearanceLightStatusBars = isLight
             isAppearanceLightNavigationBars = isLight
         }
