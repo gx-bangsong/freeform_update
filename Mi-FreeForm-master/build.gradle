@@ -5,7 +5,6 @@ buildscript {
         google()
         mavenCentral()
         maven { url 'https://api.xposed.info/' }
-        maven { url 'https://maven.rikka.dev/repository/maven-releases/' }
         maven { url 'https://jitpack.io' }
     }
     dependencies {
@@ -23,8 +22,13 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        // TinyPinyin 2.x was published only to JCenter. Limit the archive
+        // mirror to that group; all other dependencies still use their sources.
+        maven {
+            url 'https://maven.aliyun.com/repository/jcenter'
+            content { includeGroup 'com.github.promeg' }
+        }
         maven { url 'https://api.xposed.info/' }
-        maven { url 'https://maven.rikka.dev/repository/maven-releases/' }
         maven { url 'https://jitpack.io' }
     }
 }
