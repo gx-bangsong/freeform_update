@@ -18,8 +18,8 @@ android {
         minSdkVersion 29
         targetSdkVersion 31
         // Increase the integer version so Android accepts this APK as an update.
-        versionCode 41
-        versionName "2.0.5 eswd ver17"
+        versionCode 42
+        versionName "2.0.5 eswd ver18"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

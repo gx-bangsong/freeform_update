@@ -5,6 +5,7 @@ package com.sunshine.freeform;
 import com.sunshine.freeform.bean.MotionEventBean;
 import com.sunshine.freeform.callback.IOnRotationChangedListener;
 import android.view.Surface;
+import android.view.MotionEvent;
 import android.os.IInterface;
 
 interface IControlService {
@@ -21,4 +22,7 @@ interface IControlService {
     //屏幕方向监听器
     boolean initRotationWatcher(in IOnRotationChangedListener callback);
     boolean execShell(String command);
+    // Append rather than renumber existing Binder transactions. Versioned user
+    // services must restart after upgrade before calling this new method.
+    void touchEvent(in MotionEvent event, int displayId);
 }

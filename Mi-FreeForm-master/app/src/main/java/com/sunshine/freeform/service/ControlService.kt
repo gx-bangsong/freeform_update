@@ -97,6 +97,46 @@ class ControlService : IControlService.Stub() {
         motionEvent.recycle()
     }
 
+    private var lastInputWarning = -5000L
+
+    // Keep asynchronous InputManager mode (0): do not wait for the target app
+    // to finish handling an event inside this Binder call.
+    override fun touchEvent(event: MotionEvent, displayId: Int) {
+        try {
+            if (displayId <= 0) {
+                inputWarning("Refusing touch on invalid virtual display: $displayId")
+                return
+            }
+            val manager = inputManager
+            if (manager == null) {
+                inputWarning("InputManager is not initialized")
+                return
+            }
+            // Fail closed. A failed setDisplayId must never send touch to display 0.
+            if (!InputManager.setDisplayId(event, displayId)) {
+                inputWarning("Could not assign touch display=$displayId")
+                return
+            }
+            if (!manager.injectInputEvent(event, 0)) {
+                inputWarning("Injection rejected: display=$displayId action=${event.actionMasked}")
+            }
+        } catch (e: Exception) {
+            inputWarning("Injection failed: display=$displayId action=${event.actionMasked}", e)
+        } finally {
+            // AIDL creates a receiver-owned parcel copy in the user-service process.
+            event.recycle()
+        }
+    }
+
+    @Synchronized
+    private fun inputWarning(message: String, error: Throwable? = null) {
+        val now = SystemClock.uptimeMillis()
+        if (now - lastInputWarning >= 5000) {
+            lastInputWarning = now
+            Log.w("FreeFormInput", message, error)
+        }
+    }
+
     /**
      * 移动到全屏
      */
