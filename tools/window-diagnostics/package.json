@@ -1,0 +1,1 @@
+{"name":"freeform-usb-diagnostics","private":true,"version":"1.0.0","type":"module","scripts":{"dev":"vite --host 0.0.0.0","build":"vite build","test":"node --test"},"dependencies":{"@yume-chan/adb":"2.6.4","@yume-chan/adb-daemon-webusb":"2.3.2","@yume-chan/adb-credential-web":"2.1.0"},"devDependencies":{"vite":"^6.4.1"}}
