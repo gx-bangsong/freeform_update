@@ -48,5 +48,16 @@ npm run dev
 [`downloads/freeform-usb-lab-local.zip`](downloads/freeform-usb-lab-local.zip)，
 在 GitHub 文件页点 **Download raw file** 下载（不是下载整个仓库）。
 完整解压后 Windows 双击 `start-windows.cmd`；macOS / Linux 执行
-`python3 start_local.py`。需要 Python 3，不需要 Node.js 或重新编译。
+`python3 start_local.py`。Windows 使用系统自带的 PowerShell，无需 Python、Node.js 或管理员权限；macOS / Linux 的启动脚本仍需要 Python 3。
 在电脑 Chrome / Edge 打开启动窗口打印的 localhost 地址。
+
+
+### Windows 免安装启动
+
+完整解压运行包后双击 `start-windows.cmd`，启动脚本调用 Windows 自带的
+PowerShell 5.1 / .NET，仅在本机回环地址启动静态网页服务器。
+浏览器使用 Chrome / Edge；如果自动打开其他浏览器，复制窗口中的 localhost 地址即可。
+无需管理员权限、Python 或 Node.js。保持窗口打开，关闭窗口即可停止。
+启动命令中的 `-ExecutionPolicy Bypass` 只针对本次 PowerShell 进程，不持久修改系统执行策略。
+企业设备若禁止 PowerShell 脚本，请遵守组织策略，不要关闭安全软件或尝试提权。
+脚本源码随包提供，尚未在 Windows 实机验证；本开发环境没有 PowerShell。
